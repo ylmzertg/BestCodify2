@@ -1,4 +1,4 @@
-using BestCodify.Business;
+﻿using BestCodify.Business;
 using BestCodify.Business.Repository.IRepository;
 using BestCodify.DataAccess.Data;
 using BestCodify_Server.Service;
@@ -72,6 +72,8 @@ namespace BestCodify2
 
             app.UseEndpoints(endpoints =>
             {
+                //Razor sayfaları yapacagımız ıcın bunu maplemek lazım
+                endpoints.MapRazorPages();
                 endpoints.MapControllers();
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/_Host");
