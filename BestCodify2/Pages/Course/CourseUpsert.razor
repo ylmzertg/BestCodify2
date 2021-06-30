@@ -77,8 +77,26 @@
     private string Title { get; set; } = "Create";
     private CourseImageDto CourseImageDto { get; set; } = new CourseImageDto();
 
+    [CascadingParameter]
+    public Task<AuthenticationState> AuthenticationState { get; set; }
+
     protected override async Task OnInitializedAsync()
     {
+        var authenticationState = await AuthenticationState;
+
+        //kullanıcı gırıs yapmıs mı bılgısını alıyoruz.
+
+        if (!authenticationState.User.IsInRole(BestCodify.Common.ResultConstant.Admin_Role))
+        {
+            var uri = new Uri(_navigationManager.Uri);
+            _navigationManager.NavigateTo($"/identity/account/login?returnUrl={uri.LocalPath}");
+        }
+
+        if (authenticationState.User.IsInRole("Admin"))
+        {
+
+        }
+
         if (Id != null)
         {
             //updateing

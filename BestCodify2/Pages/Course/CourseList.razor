@@ -4,6 +4,7 @@
 @inject ICourseRepository _courseRepository
 @inject NavigationManager _navigationManager
 @inject IJSRuntime _jsRuntime
+@attribute [Authorize(Roles =BestCodify.Common.ResultConstant.Admin_Role)]
 
 <div class="row mt-4">
     <div class="col-8">
@@ -81,6 +82,6 @@
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-      //  await _jsRuntime.InvokeVoidAsync("ShowDeleteConfirmationModal");
+        //  await _jsRuntime.InvokeVoidAsync("ShowDeleteConfirmationModal");
     }
 }

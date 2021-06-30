@@ -27,6 +27,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BestCodify.Business\BestCodify.Business.csproj" />
+    <ProjectReference Include="..\BestCodify.Common\BestCodify.Common.csproj" />
     <ProjectReference Include="..\BestCodify.DataAccess\BestCodify.DataAccess.csproj" />
   </ItemGroup>
 
