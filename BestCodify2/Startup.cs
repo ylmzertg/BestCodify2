@@ -5,6 +5,8 @@ using BestCodify_Server.Service;
 using BestCodify_Server.Service.IService;
 using BestCodify2.Areas.Identity;
 using BestCodify2.Data;
+using BestCodify2.Service;
+using BestCodify2.Service.IService;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Hosting;
@@ -39,6 +41,7 @@ namespace BestCodify2
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddScoped<ICourseRepository, CourseRepository>();
             services.AddScoped<ICourseImageRepository, CourseImageRepository>();
+            services.AddScoped<IDbInitializer, DbInitializer>();
             services.AddScoped<IFileUpload, FileUpload>();
             services.AddRazorPages();
             services.AddServerSideBlazor();
@@ -48,7 +51,7 @@ namespace BestCodify2
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,IDbInitializer _dbInitializer)
         {
             if (env.IsDevelopment())
             {
@@ -69,7 +72,7 @@ namespace BestCodify2
 
             app.UseAuthentication();
             app.UseAuthorization();
-
+            _dbInitializer.SetDefaulValues();
             app.UseEndpoints(endpoints =>
             {
                 //Razor sayfaları yapacagımız ıcın bunu maplemek lazım

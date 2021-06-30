@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BestCodify.DataAccess.Data
 {
-    public class BestCodifyContext : IdentityDbContext
+    public class BestCodifyContext : IdentityDbContext<AppUser>
     {
         public BestCodifyContext(DbContextOptions<BestCodifyContext> options)
                 : base(options)

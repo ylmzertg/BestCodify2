@@ -10,6 +10,8 @@
         public const string RecordUpdateNotSuccessfully = "Record Update Not Successfully";
         public const string RecordRemoveNotSuccessfully = "Record Remove Not Successfully";
         public const string RecordRemoveSuccessfully = "Record Remove Successfully";
+        public const string IdNotNull = "Id value not null";
+        public const string InvalidAuthentication = "Invalid Authentication";
 
         //---------------------------------------------------------------------------------------//
         public const string Admin_Role = "Administrator";
