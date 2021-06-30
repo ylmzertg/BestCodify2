@@ -12,6 +12,7 @@
         public const string RecordRemoveSuccessfully = "Record Remove Successfully";
         public const string IdNotNull = "Id value not null";
         public const string InvalidAuthentication = "Invalid Authentication";
+        public const string TokenResponseMessage = "Token Create Successfull";
 
         //---------------------------------------------------------------------------------------//
         public const string Admin_Role = "Administrator";

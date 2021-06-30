@@ -1,6 +1,7 @@
 using BestCodify.Business;
 using BestCodify.Business.Repository.IRepository;
 using BestCodify.DataAccess.Data;
+using BestCodify_Api.Helper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -29,9 +30,12 @@ namespace BestCodify_Api
                options.UseSqlServer(
                    Configuration.GetConnectionString("BestCodifyConnecton")));
 
-            services.AddIdentity<AppUser,IdentityRole>()
+            services.AddIdentity<AppUser, IdentityRole>()
                         .AddEntityFrameworkStores<BestCodifyContext>()
                         .AddDefaultTokenProviders();
+
+            var appSettingsSection = Configuration.GetSection("ApiSettings");
+            services.Configure<ApiSettings>(appSettingsSection);
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddScoped<ICourseRepository, CourseRepository>();
