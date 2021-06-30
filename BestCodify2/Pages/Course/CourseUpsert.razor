@@ -1,0 +1,196 @@
+﻿@page "/course/create"
+@page "/course/edit/{Id:int}"
+
+@using BestCodify.Models
+@using BestCodify.Business.Repository.IRepository
+@using BestCodify_Server.Service.IService
+
+@inject ICourseRepository _courseRepository
+@inject ICourseImageRepository _courseImageRepository
+@inject NavigationManager _navigationManager
+@inject IJSRuntime _jsRuntime
+@inject IFileUpload _fileUpload
+
+
+<div class="row mt-2 mb-5">
+    <h3 class="card-title text-info mb-3 ml-3">@Title Course</h3>
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <EditForm Model="CourseDtoModel" OnValidSubmit="HandleCourseUpsert">
+                    <DataAnnotationsValidator></DataAnnotationsValidator>
+                    @*<ValidationSummary></ValidationSummary>*@
+                    <div class="form-group">
+                        <label>Name</label>
+                        <InputText @bind-Value="CourseDtoModel.Name" class="form-control"></InputText>
+                        <ValidationMessage For="()=>CourseDtoModel.Name"></ValidationMessage>
+                    </div>
+                    <div class="form-group">
+                        <label>Occupancy</label>
+                        <InputNumber @bind-Value="CourseDtoModel.Occupancy" min="0" class="form-control"></InputNumber>
+                        <ValidationMessage For="()=>CourseDtoModel.Occupancy"></ValidationMessage>
+                    </div>
+                    <div class="form-group">
+                        <label>Rate</label>
+                        <InputNumber @bind-Value="CourseDtoModel.RegularRate" class="form-control"></InputNumber>
+                        <ValidationMessage For="()=>CourseDtoModel.RegularRate"></ValidationMessage>
+                    </div>
+                    <div class="form-group">
+                        <label>Details</label>
+                        <InputTextArea @bind-Value="CourseDtoModel.Details" class="form-control"></InputTextArea>
+                    </div>
+                    <div class="form-group">
+                        <InputFile OnChange="HandleImageUpload" multiple></InputFile>
+                        <div class="row">
+                            @if (CourseDtoModel.ImageUrls != null && CourseDtoModel.ImageUrls.Count > 0)
+                            {
+                                int serial = 1;
+                                foreach (var courseImage in CourseDtoModel.ImageUrls)
+                                {
+                                    <div class="com-md-2 mt-3">
+                                        <div class="course-image" style="background:url('@courseImage') 50% 50%;height:150px; border:3px solid black">
+                                            <span class="course-image-title" style="padding:0px 6px;">@serial</span>
+                                        </div>
+                                        <button type="button" class="btn btn-outline-danger btn-block mt-4">Delete</button>
+                                    </div>
+                                    serial++;
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary">@Title Course</button>
+                        <NavLink href="course" class="btn btn-secondary">Back To Index</NavLink>
+                    </div>
+                </EditForm>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@code {
+
+    [Parameter]
+    public int? Id { get; set; }
+    private CourseDto CourseDtoModel { get; set; } = new CourseDto();
+    private string Title { get; set; } = "Create";
+    private CourseImageDto CourseImageDto { get; set; } = new CourseImageDto();
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (Id != null)
+        {
+            //updateing
+            Title = "Update";
+            var data = await _courseRepository.GetCourse(Id.Value);
+            CourseDtoModel = data.Data;
+            if (CourseDtoModel.CourseImageDto != null)
+            {
+                CourseDtoModel.ImageUrls = CourseDtoModel.CourseImageDto.Select(x => x.CourseImageUrl).ToList();
+            }
+        }
+        else
+        {
+            //create
+            Title = "Create";
+            CourseDtoModel = new CourseDto();
+        }
+    }
+
+    private async Task HandleCourseUpsert()
+    {
+        try
+        {
+            var courseDetailByName = await _courseRepository.IsCourseUnique(CourseDtoModel.Name, CourseDtoModel.Id);
+            if (courseDetailByName.Data != null)
+            {
+                await _jsRuntime.ToastrError("Course already");
+                return;
+            }
+            if (CourseDtoModel.Id != 0 && Title == "Update")
+            {
+                //update
+                var updateRoomResult = await _courseRepository.UpdateCourse(CourseDtoModel.Id, CourseDtoModel);
+                await _jsRuntime.ToastrSuccess("Course updated successfull");
+            }
+            else
+            {
+                //create
+                var createdResult = await _courseRepository.CreateCourse(CourseDtoModel);
+                await AddCourseImage(createdResult.Data);
+                await _jsRuntime.ToastrSuccess("Course created successfull");
+            }
+        }
+        catch (Exception ex)
+        {
+
+            throw;
+        }
+
+        //var courseDetailByName = await _courseRepository.IsCourseUnique(CourseDtoModel.Name);
+        _navigationManager.NavigateTo("course");
+    }
+
+    private async Task HandleImageUpload(InputFileChangeEventArgs e)
+    {
+        try
+        {
+            var images = new List<string>();
+            if (e.GetMultipleFiles().Count > 0)
+            {
+                foreach (var file in e.GetMultipleFiles())
+                {
+                    System.IO.FileInfo fileInfo = new System.IO.FileInfo(file.Name);
+                    if (fileInfo.Extension.ToLower() == ".jpg" || fileInfo.Extension.ToLower() == ".png" || fileInfo.Extension.ToLower() == ".jpeg")
+                    {
+                        var uploadedImagePath = await _fileUpload.UploadFile(file);
+                        images.Add(uploadedImagePath);
+                    }
+                    else
+                    {
+                        await _jsRuntime.ToastrError("Non format compatible");
+                        return;
+                    }
+
+                }
+                if (images.Any())
+                {
+                    if (CourseDtoModel.ImageUrls != null && CourseDtoModel.ImageUrls.Any())
+                        CourseDtoModel.ImageUrls.AddRange(images);
+                    else
+                    {
+                        CourseDtoModel.ImageUrls = new List<string>();
+                        CourseDtoModel.ImageUrls.AddRange(images);
+                    }
+                }
+                else
+                {
+                    await _jsRuntime.ToastrError("Image uploading failed");
+                    return;
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+
+            throw;
+        }
+    }
+
+    private async Task AddCourseImage(CourseDto model)
+    {
+        if (model.ImageUrls != null)
+        {
+            foreach (var imageUrl in model.ImageUrls)
+            {
+                CourseImageDto = new CourseImageDto()
+                {
+                    CourseId = model.Id,
+                    CourseImageUrl = imageUrl
+                };
+                await _courseImageRepository.CreateCourseImage(CourseImageDto);
+            }
+        }
+    }
+}

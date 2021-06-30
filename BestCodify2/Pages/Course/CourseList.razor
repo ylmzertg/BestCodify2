@@ -1,0 +1,86 @@
+﻿@page "/course"
+@using BestCodify.Models
+@using BestCodify.Business.Repository.IRepository
+@inject ICourseRepository _courseRepository
+@inject NavigationManager _navigationManager
+@inject IJSRuntime _jsRuntime
+
+<div class="row mt-4">
+    <div class="col-8">
+        <h4 class="card-title text-info ">Course List </h4>
+    </div>
+    <div class="col-3 offset-3">
+        <NavLink href="course/create" class="btn btn-info form-control">Add new Course</NavLink>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-12">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Occupancy</th>
+                    <th>Rate</th>
+                    <th>Details</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (CourseModelDto.Any())
+                {
+                    foreach (var crs in CourseModelDto)
+                    {
+                        <tr>
+                            <td>@crs.Name</td>
+                            <td>@crs.Occupancy</td>
+                            <td>@crs.RegularRate.ToString("c")</td>
+                            <td>@crs.Details</td>
+                            <td>
+                                <NavLink href="@($"course/edit/{crs.Id}")" class="btn btn-primary">
+                                    Edit
+                                </NavLink>
+                                <button class="btn btn-danger" @onclick="()=>HandleDelete(crs.Id)">Delete</button>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr colspan="5">
+                        <td>@ErrorMessage</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<DeleteConfirmation></DeleteConfirmation>
+
+@code {
+    private IEnumerable<CourseDto> CourseModelDto { get; set; } = new List<CourseDto>();
+    private string ErrorMessage { get; set; }
+    private int? DeleteCourseId { get; set; } = null;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var data = await _courseRepository.GetAllCourse();
+
+        if (!data.IsSuccess)
+            ErrorMessage = data.Message;
+        else
+            CourseModelDto = data.Data;
+    }
+
+    private async Task HandleDelete(int roomId)
+    {
+        DeleteCourseId = roomId;
+        await _jsRuntime.InvokeVoidAsync("ShowDeleteConfirmationModal");
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+      //  await _jsRuntime.InvokeVoidAsync("ShowDeleteConfirmationModal");
+    }
+}
