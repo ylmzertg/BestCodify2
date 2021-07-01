@@ -4,7 +4,7 @@
 @inject ICourseRepository _courseRepository
 @inject NavigationManager _navigationManager
 @inject IJSRuntime _jsRuntime
-@attribute [Authorize(Roles =BestCodify.Common.ResultConstant.Admin_Role)]
+@*@attribute [Authorize(Roles =BestCodify.Common.ResultConstant.Admin_Role)]*@
 
 <div class="row mt-4">
     <div class="col-8">
@@ -34,9 +34,9 @@
                     {
                         <tr>
                             <td>@crs.Name</td>
-                            <td>@crs.Occupancy</td>
-                            <td>@crs.RegularRate.ToString("c")</td>
-                            <td>@crs.Details</td>
+                            @*<td>@crs.Occupancy</td>
+                            <td>@crs.RegularRate.ToString("c")</td>*@
+                            <td>@crs.Description</td>
                             <td>
                                 <NavLink href="@($"course/edit/{crs.Id}")" class="btn btn-primary">
                                     Edit

@@ -4,14 +4,16 @@ using BestCodify.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BestCodify.DataAccess.Migrations
 {
     [DbContext(typeof(BestCodifyContext))]
-    partial class BestCodifyContextModelSnapshot : ModelSnapshot
+    [Migration("20210701174656_CourseNewColumns")]
+    partial class CourseNewColumns
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -113,14 +115,13 @@ namespace BestCodify.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Occupancy")
+                        .HasColumnType("int");
+
                     b.Property<double>("RegularRate")
                         .HasColumnType("float");
 
-                    b.Property<string>("SubTitle")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
+                    b.Property<string>("SqFt")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UpdatedBy")

@@ -35,13 +35,13 @@ namespace BestCodify2
             services.AddDbContext<BestCodifyContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("BestCodifyConnecton")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<BestCodifyContext>();
+            services.AddIdentity<IdentityUser, IdentityRole>()
+            .AddEntityFrameworkStores<BestCodifyContext>().AddDefaultTokenProviders()
+            .AddDefaultUI();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddScoped<ICourseRepository, CourseRepository>();
             services.AddScoped<ICourseImageRepository, CourseImageRepository>();
-            services.AddScoped<IDbInitializer, DbInitializer>();
+            //services.AddScoped<IDbInitializer, DbInitializer>();
             services.AddScoped<IFileUpload, FileUpload>();
             services.AddRazorPages();
             services.AddServerSideBlazor();
@@ -51,7 +51,7 @@ namespace BestCodify2
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,IDbInitializer _dbInitializer)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -72,7 +72,7 @@ namespace BestCodify2
 
             app.UseAuthentication();
             app.UseAuthorization();
-            _dbInitializer.SetDefaulValues();
+           // _dbInitializer.SetDefaulValues();
             app.UseEndpoints(endpoints =>
             {
                 //Razor sayfaları yapacagımız ıcın bunu maplemek lazım

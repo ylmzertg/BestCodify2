@@ -26,18 +26,27 @@
                         <ValidationMessage For="()=>CourseDtoModel.Name"></ValidationMessage>
                     </div>
                     <div class="form-group">
-                        <label>Occupancy</label>
-                        <InputNumber @bind-Value="CourseDtoModel.Occupancy" min="0" class="form-control"></InputNumber>
-                        <ValidationMessage For="()=>CourseDtoModel.Occupancy"></ValidationMessage>
+                        <label>Title</label>
+                        <InputText @bind-Value="CourseDtoModel.Title" min="0" class="form-control"></InputText>
+                        <ValidationMessage For="()=>CourseDtoModel.Title"></ValidationMessage>
                     </div>
                     <div class="form-group">
-                        <label>Rate</label>
-                        <InputNumber @bind-Value="CourseDtoModel.RegularRate" class="form-control"></InputNumber>
-                        <ValidationMessage For="()=>CourseDtoModel.RegularRate"></ValidationMessage>
+                        <label>Sub Title</label>
+                        <InputText @bind-Value="CourseDtoModel.SubTitle" class="form-control"></InputText>
+                        <ValidationMessage For="()=>CourseDtoModel.SubTitle"></ValidationMessage>
+                    </div>
+                    <div class="form-group col-3">
+                        <label>Course Price</label>
+                        <InputNumber @bind-Value="CourseDtoModel.CoursePrice" min="0" class="form-control"></InputNumber>
+                        <ValidationMessage For="()=>CourseDtoModel.CoursePrice"></ValidationMessage>
                     </div>
                     <div class="form-group">
-                        <label>Details</label>
-                        <InputTextArea @bind-Value="CourseDtoModel.Details" class="form-control"></InputTextArea>
+                        <label>Active</label>
+                        <InputCheckbox @bind-Value="CourseDtoModel.IsActive" class="form-control"></InputCheckbox>
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <InputTextArea @bind-Value="CourseDtoModel.Description" class="form-control"></InputTextArea>
                     </div>
                     <div class="form-group">
                         <InputFile OnChange="HandleImageUpload" multiple></InputFile>
@@ -86,16 +95,16 @@
 
         //kullanıcı gırıs yapmıs mı bılgısını alıyoruz.
 
-        if (!authenticationState.User.IsInRole(BestCodify.Common.ResultConstant.Admin_Role))
-        {
-            var uri = new Uri(_navigationManager.Uri);
-            _navigationManager.NavigateTo($"/identity/account/login?returnUrl={uri.LocalPath}");
-        }
+        //if (!authenticationState.User.IsInRole(BestCodify.Common.ResultConstant.Admin_Role))
+        //{
+        //    var uri = new Uri(_navigationManager.Uri);
+        //    _navigationManager.NavigateTo($"/identity/account/login?returnUrl={uri.LocalPath}");
+        //}
 
-        if (authenticationState.User.IsInRole("Admin"))
-        {
+        //if (authenticationState.User.IsInRole("Admin"))
+        //{
 
-        }
+        //}
 
         if (Id != null)
         {
@@ -136,8 +145,9 @@
             {
                 //create
                 var createdResult = await _courseRepository.CreateCourse(CourseDtoModel);
-                await AddCourseImage(createdResult.Data);
-                await _jsRuntime.ToastrSuccess("Course created successfull");
+                CourseDtoModel.Id = createdResult.Data.Id;
+                await AddCourseImage(CourseDtoModel);
+                //await _jsRuntime.ToastrSuccess("Course created successfull");
             }
         }
         catch (Exception ex)

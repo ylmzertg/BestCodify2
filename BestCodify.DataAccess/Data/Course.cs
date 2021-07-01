@@ -15,18 +15,17 @@ namespace BestCodify.DataAccess.Data
         [Required(ErrorMessage ="Price Must be have fill")]
         public decimal CoursePrice { get; set; }
 
-        [Required]
-        //Kullanım suresi
-        //TODO:usage rate sen kursu cekerken occupancy degıstır adını
-        public int Occupancy { get; set; }
+        [Required(ErrorMessage = "Must be selected Is-Active")]
+        public bool IsActive { get; set; } = true;
 
         [Required]
-        //Normal Ücret
+        public string Title { get; set; }
+        public string SubTitle { get; set; }
         public double RegularRate { get; set; }
         public string Details { get; set; }
 
         //Bu olmayabilir.
-        public string SqFt { get; set; }
+       // public string SqFt { get; set; }
         public string CreatedBy { get; set; }
         public DateTime CreatedDate { get; set; } = DateTime.Now;
         public string UpdatedBy { get; set; }
