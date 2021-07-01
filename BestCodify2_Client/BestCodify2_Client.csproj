@@ -15,4 +15,8 @@
     <ProjectReference Include="..\BestCodify.Business\BestCodify.Business.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\Courses\" />
+  </ItemGroup>
+
 </Project>
