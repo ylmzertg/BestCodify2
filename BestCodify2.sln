@@ -18,7 +18,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BestCodify.DataAccess", "Be
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BestCodify.Models", "BestCodify.Models\BestCodify.Models.csproj", "{63EB7E1A-6B19-4DDB-B974-2620139A40E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BestCodify_Api", "BestCodify_Api\BestCodify_Api.csproj", "{EDDEF742-D699-4421-8DC1-0FBE71F8AA56}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BestCodify_Api", "BestCodify_Api\BestCodify_Api.csproj", "{EDDEF742-D699-4421-8DC1-0FBE71F8AA56}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BestCodify2_Client", "BestCodify2_Client\BestCodify2_Client.csproj", "{81882925-34F2-4BA5-BFD9-48EB3F9A1FB5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,6 +52,10 @@ Global
 		{EDDEF742-D699-4421-8DC1-0FBE71F8AA56}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EDDEF742-D699-4421-8DC1-0FBE71F8AA56}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EDDEF742-D699-4421-8DC1-0FBE71F8AA56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81882925-34F2-4BA5-BFD9-48EB3F9A1FB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81882925-34F2-4BA5-BFD9-48EB3F9A1FB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81882925-34F2-4BA5-BFD9-48EB3F9A1FB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81882925-34F2-4BA5-BFD9-48EB3F9A1FB5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
