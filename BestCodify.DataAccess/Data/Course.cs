@@ -12,6 +12,9 @@ namespace BestCodify.DataAccess.Data
         [Required]
         public string Name { get; set; }
 
+        [Required(ErrorMessage ="Price Must be have fill")]
+        public decimal CoursePrice { get; set; }
+
         [Required]
         //Kullanım suresi
         //TODO:usage rate sen kursu cekerken occupancy degıstır adını
