@@ -19,7 +19,8 @@ namespace BestCodify_Api.Controllers
         public async Task<IActionResult> GetCourses()
         {
             var allCourse = await _courseRepository.GetAllCourse();
-            return Ok(allCourse);
+            var data = allCourse.Data;
+            return Ok(data);
         }
 
         [HttpGet("{courseId}")]
