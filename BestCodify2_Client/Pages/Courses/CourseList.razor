@@ -5,40 +5,42 @@
 
 
 <br />
-<div class="col-3" style="padding:4px;">
+<div class="row">
     @if (Courses != null)
     {
         foreach (var course in Courses)
         {
-            <div class="card mb-3">
-                <div class="card-body">
-                    <h5 class="card-title">@course.Name</h5>
-                    <h6 class="card-subtitle text-muted">@course.SubTitle</h6>
-                </div>
-                <img class="d-block w-100" src="images/ertugrulYilmaz.jpeg" style=" width: 100% ;height:100% " />
-                <div class="card-body">
-                    <p class="card-text">Description :@course.Description</p>
-                </div>
-                <hr />
-                <div class="card-body">
-                    <p class="card-text">Price:$ @course.CoursePrice</p>
+            <div class="col-3" style="padding:40px;">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">@course.Name</h5>
+                        <h6 class="card-subtitle text-muted">@course.SubTitle</h6>
+                    </div>
+                    <img class="d-block w-100" src="images/ertugrulYilmaz.jpeg" style=" width: 50% ;height:50% " />
+                    <div class="card-body">
+                        <p class="card-text">Description :@course.Description</p>
+                    </div>
                     <hr />
-                    @*<p class="card-text">Vote: @course.Occupancy</p>*@
-                    <hr />
-                    <p class="card-text">Student Count: @course.TotalCount</p>
-                </div>
-                <div class="card-body">
-                    <button class="btn btn-warning">Detail</button>
-                    <button class="btn btn-primary">Add Basket</button>
-                </div>
-                <div class="card-footer text-muted">
-                    Create Date:  @course.CreateDate
+                    <div class="card-body">
+                        <p class="card-text">Price:$ @course.CoursePrice</p>
+                        <hr />
+                        @*<p class="card-text">Vote: @course.Occupancy</p>*@
+                        <hr />
+                        <p class="card-text">Student Count: @course.TotalCount</p>
+                    </div>
+                    <div class="card-body">
+                        <button class="btn btn-warning">Detail</button>
+                        <button class="btn btn-primary">Add Basket</button>
+                    </div>
+                    <div class="card-footer text-muted">
+                        Create Date:  @course.CreateDate
+                    </div>
                 </div>
             </div>
         }
     }
-
 </div>
+
 
 @code {
 
