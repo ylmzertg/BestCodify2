@@ -74,9 +74,9 @@
             CourseModelDto = data.Data;
     }
 
-    private async Task HandleDelete(int roomId)
+    private async Task HandleDelete(int courseId)
     {
-        DeleteCourseId = roomId;
+        DeleteCourseId = courseId;
         await _jsRuntime.InvokeVoidAsync("ShowDeleteConfirmationModal");
     }
 

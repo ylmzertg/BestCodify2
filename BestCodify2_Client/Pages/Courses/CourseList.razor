@@ -1,7 +1,7 @@
 ﻿@page "/courseList"
 @inject IJSRuntime _jsRuntime
 @inject ICourseService _courseService
-
+@inject NavigationManager _navigationManager
 
 
 <br />
@@ -25,12 +25,12 @@
                         <p class="card-text">Price:$ @course.CoursePrice</p>
                         <hr />
                         @*<p class="card-text">Vote: @course.Occupancy</p>*@
-                        <hr />
+                        @*<hr />*@
                         <p class="card-text">Student Count: @course.TotalCount</p>
                     </div>
                     <div class="card-body">
-                        <button class="btn btn-warning">Detail</button>
-                        <button class="btn btn-primary">Add Basket</button>
+                        <button class="btn btn-warning" @onclick="()=>HandleGoDetail(course.Id)">Detail</button>
+                        <button class="btn btn-primary">Buy Course</button>
                     </div>
                     <div class="card-footer text-muted">
                         Create Date:  @course.CreateDate
@@ -58,6 +58,11 @@
         {
             await _jsRuntime.ToastrError(ex.Message);
         }
+    }
+
+    private void HandleGoDetail(int courseId)
+    {
+        _navigationManager.NavigateTo("courseDetail/" + courseId);
     }
 
     private async Task GetAllCourse()

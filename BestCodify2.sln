@@ -20,7 +20,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BestCodify.Models", "BestCo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BestCodify_Api", "BestCodify_Api\BestCodify_Api.csproj", "{EDDEF742-D699-4421-8DC1-0FBE71F8AA56}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BestCodify2_Client", "BestCodify2_Client\BestCodify2_Client.csproj", "{81882925-34F2-4BA5-BFD9-48EB3F9A1FB5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BestCodify2_Client", "BestCodify2_Client\BestCodify2_Client.csproj", "{81882925-34F2-4BA5-BFD9-48EB3F9A1FB5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
