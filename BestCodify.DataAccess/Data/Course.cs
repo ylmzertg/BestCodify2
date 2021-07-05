@@ -23,9 +23,6 @@ namespace BestCodify.DataAccess.Data
         public string SubTitle { get; set; }
         public double RegularRate { get; set; }
         public string Details { get; set; }
-
-        //Bu olmayabilir.
-       // public string SqFt { get; set; }
         public string CreatedBy { get; set; }
         public DateTime CreatedDate { get; set; } = DateTime.Now;
         public string UpdatedBy { get; set; }
