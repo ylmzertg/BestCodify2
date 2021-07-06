@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{56DEADC9-0A64-460C-AC74-B10777E0FE5C}"
 	ProjectSection(SolutionItems) = preProject
 		ClientCourseDetailTemp.html = ClientCourseDetailTemp.html
+		ClientCourseDetailTemp2.html = ClientCourseDetailTemp2.html
 		Notes.txt = Notes.txt
 	EndProjectSection
 EndProject

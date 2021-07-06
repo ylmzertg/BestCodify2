@@ -10,6 +10,7 @@ namespace BestCodify.Business.Mapper
         {
             CreateMap<CourseDto, Course>().ReverseMap();
             CreateMap<CourseImageDto, CourseImage>().ReverseMap();
+            CreateMap<CourseOrderInfoDto, CourseOrderInfo>().ReverseMap();
         }
     }
 }
