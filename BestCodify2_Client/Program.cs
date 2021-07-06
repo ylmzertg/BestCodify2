@@ -20,6 +20,7 @@ namespace BestCodify2_Client
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(ResultConstant.BaseApiUrl) });
             builder.Services.AddBlazoredLocalStorage();
             builder.Services.AddScoped<ICourseService, CourseService>();
+            builder.Services.AddScoped<ICourseOrderInfoService, CourseOrderInfoService>();
             await builder.Build().RunAsync();
         }
     }

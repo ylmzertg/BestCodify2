@@ -1,67 +1,135 @@
 ﻿@page "/courseDetail/{Id:int}"
+@inject IJSRuntime _jsRuntime
+@inject ICourseService _courseService
+@inject NavigationManager _navigationManager
 
-    <br />
-    <br />
-    <br />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8">
-                <div class="project-info-box mt-0">
-                    <h3>Product Title</h3>
-                    <br />
-                    <h5>Product Subtitle</h5>
-                    <p class="mb-0">
-                        Vivamus pellentesque, felis in aliquam ullamcorper, lorem tortor porttitor erat, hendrerit porta nunc tellus eu lectus. Ut vel imperdiet est. Pellentesque condimentum, dui et blandit laoreet, quam nisi tincidunt tortor.
-                        Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
-
-                        The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
-                        Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
-
-                        The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
-                        Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
-
-                        The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
-                    </p>
-                </div><!-- / project-info-box -->
+<br />
+<br />
+<br />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <img src="@CourseOrderInfoVM.CourseInfo?.CourseDto?.CourseImageDto?.CourseImageUrl" alt="project-image"
+            <div class="project-info-box mt-0">
+                <h3>@CourseOrderInfoVM.CourseInfo?.Title</h3>
                 <br />
-                <div class="project-info-box">
-                    <p><b>Name:</b> CUPCAKE CO</p>
-                    <br />
-                    <p><b>Create Date:</b> 14.02.2020</p>
-                    <br />
-                    <p><b>Created BY:</b> James Doe</p>
-                    <br />
-                    <p><b>Tags:</b> Illustrator</p>
-                    <br />
-                    <p class="mb-0"><b>Price:</b> $500</p>
-                    <br />
-                </div><!-- / project-info-box -->
+                <h5>@CourseOrderInfoVM.CourseInfo?.SubTitle</h5>
+                <p class="mb-0">
+                    @CourseOrderInfoVM.CourseInfo?.CourseDto?.Description
+                </p>
+            </div><!-- / project-info-box -->
+            <br />
+            <div class="project-info-box">
+                <p><b>Name:</b> @CourseOrderInfoVM.CourseInfo?.CourseDto?.CreatedBy</p>
                 <br />
-                <div class="project-info-box mt-0 mb-0">
-                    <p class="mb-0">
-                        <span class="fw-bold mr-10 va-middle hide-mobile">Share:</span>
-                        <a href="#x" class="btn btn-xs btn-facebook btn-circle btn-icon mr-5 mb-0"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#x" class="btn btn-xs btn-twitter btn-circle btn-icon mr-5 mb-0"><i class="fab fa-twitter"></i></a>
-                        <a href="#x" class="btn btn-xs btn-pinterest btn-circle btn-icon mr-5 mb-0"><i class="fab fa-pinterest"></i></a>
-                        <a href="#x" class="btn btn-xs btn-linkedin btn-circle btn-icon mr-5 mb-0"><i class="fab fa-linkedin-in"></i></a>
-                    </p>
-                </div><!-- / project-info-box -->
+                <p><b>Create Date:</b>  @CourseOrderInfoVM.CourseInfo?.CourseDto?.CreatedDate</p>
                 <br />
-            </div><!-- / column -->
+                <p><b>Created BY:</b>  @CourseOrderInfoVM.CourseInfo?.CourseDto?.CreatedBy</p>
+                <br />
+                <p><b>Record Count : </b> @CourseOrderInfoVM.CourseInfo?.CourseDto?.TotalCount</p>
+                <br />
+                <p class="mb-0"><b>Price:</b> $ : @CourseOrderInfoVM.CourseInfo?.CoursePrice</p>
+                <br />
+            </div><!-- / project-info-box -->
+            <br />
+            <div class="project-info-box mt-0 mb-0">
+                <p class="mb-0">
+                    <span class="fw-bold mr-10 va-middle hide-mobile">Share:</span>
+                    <a href="#x" class="btn btn-xs btn-facebook btn-circle btn-icon mr-5 mb-0"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#x" class="btn btn-xs btn-twitter btn-circle btn-icon mr-5 mb-0"><i class="fab fa-twitter"></i></a>
+                    <a href="#x" class="btn btn-xs btn-pinterest btn-circle btn-icon mr-5 mb-0"><i class="fab fa-pinterest"></i></a>
+                    <a href="#x" class="btn btn-xs btn-linkedin btn-circle btn-icon mr-5 mb-0"><i class="fab fa-linkedin-in"></i></a>
+                </p>
+            </div><!-- / project-info-box -->
+            <br />
+        </div><!-- / column -->
 
-            <div class="col-md-4">
-                <img src="https://via.placeholder.com/400x300/FFB6C1/000000" alt="project-image" class="rounded">
-                <div class="project-info-box">
-                    <p><b>Name:</b></p>
-                </div><!-- / project-info-box -->
-            </div><!-- / column -->
+        <div class="col-md-4">
+            <EditForm Model="CourseOrderInfoVM" class="container" OnValidSubmit="HandleGoCheckout">
+
+                <div class="row px-2 text-success border-bottom"><div class="col-7 py-1"><p style="font-size:x-large;margin:0px;">Enter Details</p></div></div>
+
+                <div class="form-group pt-2">
+                    <label class="text-warning">Name</label>
+                    <InputText @bind-Value="CourseOrderInfoVM.CourseInfo.Name" type="text" class="form-control" />
+                </div>
+                <div class="form-group pt-2">
+                    <label class="text-warning">Course Price</label>
+                    <InputNumber @bind-Value="CourseOrderInfoVM.CourseInfo.CoursePrice" type="text" class="form-control" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="text-warning">Email</label>
+                    <InputText @bind-Value="CourseOrderInfoVM.CourseInfo.Email" type="text" class="form-control" />
+                </div>
+                <div class="card-body">
+                    <button type="submit" class="btn btn-success form-control">Buy Course</button>
+                </div>
+            </EditForm>
         </div>
+
     </div>
-    <br />
-    <br />
-    @code {
-        [Parameter]
-        public int? Id { get; set; }
+</div>
+<br />
+<br />
+@code {
+    [Parameter]
+    public int? Id { get; set; }
+
+    public CourseOrderInfoVM CourseOrderInfoVM { get; set; } = new CourseOrderInfoVM();
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            CourseOrderInfoVM.CourseInfo = new CourseOrderInfoDto();
+            CourseOrderInfoVM.CourseInfo.CourseDto = new CourseDto();
+            if (Id != null)
+            {
+                var data = await _courseService.GetCourse(Id.Value);
+                CourseOrderInfoVM.CourseInfo.CourseDto = data.Data;
+                CourseOrderInfoVM.CourseInfo.CourseId = data.Data.Id;
+                //CourseOrderInfoVM.CourseInfo.Name = data.Data.Title;
+                CourseOrderInfoVM.CourseInfo.SubTitle = data.Data.SubTitle;
+                CourseOrderInfoVM.CourseInfo.CoursePrice = data.Data.CoursePrice;
+                CourseOrderInfoVM.CourseInfo.UserId = data.Data.CreatedBy;
+                CourseOrderInfoVM.CourseInfo.CourseDto.Description = data.Data.Description;
+            }
+        }
+        catch (Exception ex)
+        {
+            await _jsRuntime.ToastrError(ex.Message);
+        }
+    }
+
+    private async Task HandleGoCheckout()
+    {
+        if (!await HandleValidation())
+        {
+            return;
+        }
+    }
+
+    private async Task<bool>
+        HandleValidation()
+    {
+        if (string.IsNullOrEmpty(CourseOrderInfoVM.CourseInfo.Name))
+        {
+            await _jsRuntime.ToastrError("Name cannot be empty");
+            return false;
+        }
+        if (CourseOrderInfoVM.CourseInfo.CoursePrice <= 0)
+        {
+            await _jsRuntime.ToastrError("price must be greater than zero");
+            return false;
+        }
+
+        if (string.IsNullOrEmpty(CourseOrderInfoVM.CourseInfo.Email))
+        {
+            await _jsRuntime.ToastrError("Email cannot be empty");
+            return false;
+        }
+        return true;
 
     }
+}

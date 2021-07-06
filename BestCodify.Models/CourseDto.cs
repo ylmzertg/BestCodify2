@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace BestCodify.Models
@@ -15,10 +14,10 @@ namespace BestCodify.Models
         public string Description { get; set; }
         public bool IsActive { get; set; } = true;
         public decimal CoursePrice{ get; set; }
-
-        public DateTime CreateDate { get; set; }
-        public int TotalCount { get; set; }
-        public virtual ICollection<CourseImageDto> CourseImageDto { get; set; }
-        public List<string> ImageUrls { get; set; }
+        public string CreatedBy { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public int TotalCount { get; set; } 
+        public virtual CourseImageDto CourseImageDto { get; set; }
+        public string ImageUrls { get; set; }
     }
 }

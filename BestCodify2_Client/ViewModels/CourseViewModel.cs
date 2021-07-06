@@ -9,5 +9,6 @@ namespace BestCodify2_Client.ViewModels
         public string CourseSubTitle { get; set; }
         public decimal CoursePrice { get; set; }
         public float RegularRate { get; set; }
+        public int TotalCount { get; set; }
     }
 }

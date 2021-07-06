@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BestCodify.DataAccess.Data
 {
@@ -14,6 +15,7 @@ namespace BestCodify.DataAccess.Data
         public bool IsPaymentSuccessfull { get; set; }
         public string Email { get; set; }
         public string Status { get; set; }
+        [ForeignKey("CourseId")]
         public Course Course { get; set; }
     }
 }

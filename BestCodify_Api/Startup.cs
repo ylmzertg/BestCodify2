@@ -70,6 +70,7 @@ namespace BestCodify_Api
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddScoped<ICourseRepository, CourseRepository>();
+            services.AddScoped<ICourseOrderInfoRepository, CourseOrderInfoRepository>();
             services.AddScoped<ICourseImageRepository, CourseImageRepository>();
 
             services.AddCors(o => o.AddPolicy("BestCodify", builder =>
@@ -79,7 +80,8 @@ namespace BestCodify_Api
 
             services.AddRouting(option => option.LowercaseUrls = true);
             services.AddControllers().AddJsonOptions(opt => opt.JsonSerializerOptions.PropertyNamingPolicy = null)
-                .AddNewtonsoftJson(opt=> {
+                .AddNewtonsoftJson(opt =>
+                {
                     opt.SerializerSettings.ContractResolver = new DefaultContractResolver();
                     opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                 });

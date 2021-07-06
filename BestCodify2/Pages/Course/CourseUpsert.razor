@@ -51,7 +51,7 @@
                     <div class="form-group">
                         <InputFile OnChange="HandleImageUpload" multiple></InputFile>
                         <div class="row">
-                            @if (CourseDtoModel.ImageUrls != null && CourseDtoModel.ImageUrls.Count > 0)
+                            @if (CourseDtoModel.ImageUrls != null )
                             {
                                 int serial = 1;
                                 foreach (var courseImage in CourseDtoModel.ImageUrls)
@@ -114,7 +114,7 @@
             CourseDtoModel = data.Data;
             if (CourseDtoModel.CourseImageDto != null)
             {
-                CourseDtoModel.ImageUrls = CourseDtoModel.CourseImageDto.Select(x => x.CourseImageUrl).ToList();
+                CourseDtoModel.ImageUrls = CourseDtoModel.CourseImageDto?.CourseImageUrl;
             }
         }
         else
@@ -185,12 +185,9 @@
                 if (images.Any())
                 {
                     if (CourseDtoModel.ImageUrls != null && CourseDtoModel.ImageUrls.Any())
-                        CourseDtoModel.ImageUrls.AddRange(images);
+                        CourseDtoModel.ImageUrls = images.FirstOrDefault();
                     else
-                    {
-                        CourseDtoModel.ImageUrls = new List<string>();
-                        CourseDtoModel.ImageUrls.AddRange(images);
-                    }
+                        CourseDtoModel.ImageUrls = images.FirstOrDefault();
                 }
                 else
                 {
@@ -210,15 +207,13 @@
     {
         if (model.ImageUrls != null)
         {
-            foreach (var imageUrl in model.ImageUrls)
+
+            CourseImageDto = new CourseImageDto()
             {
-                CourseImageDto = new CourseImageDto()
-                {
-                    CourseId = model.Id,
-                    CourseImageUrl = imageUrl
-                };
-                await _courseImageRepository.CreateCourseImage(CourseImageDto);
-            }
-        }
+                CourseId = model.Id,
+                CourseImageUrl = model.ImageUrls
+        };
+        await _courseImageRepository.CreateCourseImage(CourseImageDto);
     }
+}
 }

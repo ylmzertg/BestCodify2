@@ -28,9 +28,12 @@ namespace BestCodify2_Client.Service
             return new Result<IEnumerable<CourseDto>>(true, ResultConstant.RecordFound, courses);
         }
 
-        public Task<Result<CourseDto>> GetCourse(int courseId)
+        public async Task<Result<CourseDto>> GetCourse(int courseId)
         {
-            throw new NotImplementedException();
+            var response = await _httpClient.GetAsync($"api/Home/"+courseId);
+            var content = await response.Content.ReadAsStringAsync();
+            var course = JsonConvert.DeserializeObject<CourseDto>(content);
+            return new Result<CourseDto>(true, ResultConstant.RecordFound, course);
         }
     }
 }

@@ -28,6 +28,6 @@ namespace BestCodify.DataAccess.Data
         public string UpdatedBy { get; set; }
         public DateTime UpdatedDate { get; set; }
 
-        public virtual ICollection<CourseImage> CourseImages { get; set; }
+        public virtual CourseImage CourseImages { get; set; }
     }
 }

@@ -24,16 +24,14 @@
                     <div class="card-body">
                         <p class="card-text">Price:$ @course.CoursePrice</p>
                         <hr />
-                        @*<p class="card-text">Vote: @course.Occupancy</p>*@
-                        @*<hr />*@
-                        <p class="card-text">Student Count: @course.TotalCount</p>
+                        <p class="card-text">Total Course Count: @CourseVM.TotalCount</p>
                     </div>
                     <div class="card-body">
                         <button class="btn btn-warning" @onclick="()=>HandleGoDetail(course.Id)">Detail</button>
-                        <button class="btn btn-primary">Buy Course</button>
+                        <button class="btn btn-primary" @onclick="()=>HandleGoCheckout(course.Id)">Buy Course</button>
                     </div>
                     <div class="card-footer text-muted">
-                        Create Date:  @course.CreateDate
+                        Create Date:  @course.CreatedDate
                     </div>
                 </div>
             </div>
@@ -64,11 +62,16 @@
     {
         _navigationManager.NavigateTo("courseDetail/" + courseId);
     }
-
+    private void HandleGoCheckout(int courseId)
+    {
+        _navigationManager.NavigateTo("courseCheckout/" + courseId);
+    }
+    
     private async Task GetAllCourse()
     {
         var data = await _courseService.GetAllCourse();
         Courses = data.Data;
+        CourseVM.TotalCount = data.Data.ToList().Count;
     }
 
 }

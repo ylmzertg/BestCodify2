@@ -31,5 +31,9 @@
         public const string Role_Employee = "Employee";
         //-----------------------------------------------------------------------------------------//
         public const string BaseApiUrl = "https://localhost:44319/";
+        //-----------------------------------------------------------------------------------------//
+        public const string Status_Pending = "Pending";
+        public const string Status_Cancelled = "Cancelled";
+        public const string Status_Completed = "Completed";
     }
 }

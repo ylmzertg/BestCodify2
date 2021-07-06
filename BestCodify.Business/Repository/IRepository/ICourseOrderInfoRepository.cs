@@ -1,16 +1,15 @@
-﻿using BestCodify.Models;
-using System.Collections.Generic;
+﻿using BestCodify.Common;
+using BestCodify.Models;
 using System.Threading.Tasks;
 
 namespace BestCodify.Business.Repository.IRepository
 {
     public interface ICourseOrderInfoRepository
     {
-        public Task<CourseOrderInfoDto> Create(CourseOrderInfoDto details);
-        public Task<CourseOrderInfoDto> PaymentSuccessful(CourseOrderInfoDto details);
-        public Task<CourseOrderInfoDto> GetCourseOrderInfo(CourseOrderInfoDto details);
-        public Task<IEnumerable<CourseOrderInfoDto>> GetAllCourseOrderInfos(CourseOrderInfoDto details);
-        public Task<bool> UpdateCourseOrderStatus(int courseOrderId, string status);
+        public Task<Result<CourseOrderInfoDto>> Create(CourseOrderInfoDto details);
+        public Task<Result<CourseOrderInfoDto>> PaymentSuccessful(CourseOrderInfoDto details);
+        public Task<Result<CourseOrderInfoDto>> GetCourseOrderInfo(int courseId);
+        public Task<Result<bool>> UpdateCourseOrderStatus(int courseOrderId, string status);
 
     }
 }

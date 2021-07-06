@@ -51,7 +51,7 @@ namespace BestCodify.Business
                 var courseDtos =
                             _mapper.Map<IEnumerable<Course>, IEnumerable<CourseDto>>(_dbContext.Courses.Include(x => x.CourseImages));
 
-                return new Result<IEnumerable<CourseDto>>(true, ResultConstant.RecordFound, courseDtos);
+                return new Result<IEnumerable<CourseDto>>(true, ResultConstant.RecordFound, courseDtos, courseDtos.ToList().Count);
             }
             catch (Exception ex)
             {

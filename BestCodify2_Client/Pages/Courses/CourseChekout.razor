@@ -1,0 +1,90 @@
+﻿@page "/courseCheckout/{Id:int}"
+@inject ICourseService _courseService
+@inject IJSRuntime _jsRuntime
+
+<div class="col-12 col-lg-5 p-4 2 mt-4 mt-md-0" style="border: 1px solid #fff;">
+    <EditForm Model="CourseOrderInfoVM" class="container" OnValidSubmit="HandleCheckout">
+
+        <div class="row px-2 text-success border-bottom"><div class="col-7 py-1"><p style="font-size:x-large;margin:0px;">Buy Course Price</p></div></div>
+
+        <div class="form-group pt-2">
+            <label class="text-warning">Name</label>
+            <InputText @bind-Value="CourseOrderInfoVM.CourseInfo.Name" type="text" class="form-control" />
+        </div>
+        <div class="form-group pt-2">
+            <label class="text-warning">Phone</label>
+            <InputNumber @bind-Value="CourseOrderInfoVM.CourseInfo.CoursePrice" type="text" class="form-control" readonly />
+        </div>
+        <div class="form-group">
+            <label class="text-warning">Email</label>
+            <InputText @bind-Value="CourseOrderInfoVM.CourseInfo.Email" type="text" class="form-control" />
+        </div>
+        <div class="card-body">
+            <button type="submit" class="btn btn-success form-control">Buy Course</button>
+        </div>
+    </EditForm>
+</div>
+
+@code {
+    [Parameter]
+    public int? Id { get; set; }
+
+    public CourseOrderInfoVM CourseOrderInfoVM { get; set; } = new CourseOrderInfoVM();
+    public CourseOrderInfoDto CourseOrderInfoDto { get; set; } = new CourseOrderInfoDto();
+
+   
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            CourseOrderInfoVM.CourseInfo = new CourseOrderInfoDto();
+            CourseOrderInfoVM.CourseInfo.CourseDto = new CourseDto();
+            if (Id != null)
+            {
+                var data = await _courseService.GetCourse(Id.Value);
+                CourseOrderInfoVM.CourseInfo.CourseDto = data.Data;
+                CourseOrderInfoVM.CourseInfo.CourseId = data.Data.Id;
+                CourseOrderInfoVM.CourseInfo.Name = data.Data.Title;
+                CourseOrderInfoVM.CourseInfo.SubTitle = data.Data.SubTitle;
+                CourseOrderInfoVM.CourseInfo.CoursePrice = data.Data.CoursePrice;
+                CourseOrderInfoVM.CourseInfo.UserId = data.Data.CreatedBy;
+                CourseOrderInfoVM.CourseInfo.CourseDto.Description = data.Data.Description;
+            }
+        }
+        catch (Exception ex)
+        {
+            await _jsRuntime.ToastrError(ex.Message);
+        }
+    }
+
+    private async Task HandleCheckout()
+    {
+        if (!await HandleValidation())
+        {
+            return;
+        }
+    }
+
+    private async Task<bool>
+        HandleValidation()
+    {
+        if (string.IsNullOrEmpty(CourseOrderInfoVM.CourseInfo.Name))
+        {
+            await _jsRuntime.ToastrError("Name cannot be empty");
+            return false;
+        }
+        if (CourseOrderInfoVM.CourseInfo.CoursePrice <= 0)
+        {
+            await _jsRuntime.ToastrError("price must be greater than zero");
+            return false;
+        }
+
+        if (string.IsNullOrEmpty(CourseOrderInfoVM.CourseInfo.Email))
+        {
+            await _jsRuntime.ToastrError("Email cannot be empty");
+            return false;
+        }
+        return true;
+
+    }
+}

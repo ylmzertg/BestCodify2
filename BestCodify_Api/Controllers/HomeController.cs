@@ -19,8 +19,8 @@ namespace BestCodify_Api.Controllers
         public async Task<IActionResult> GetCourses()
         {
             var allCourse = await _courseRepository.GetAllCourse();
-            var data = allCourse.Data;
-            return Ok(data);
+            var data = allCourse;
+            return Ok(data.Data);
         }
 
         [HttpGet("{courseId}")]
@@ -32,7 +32,7 @@ namespace BestCodify_Api.Controllers
             }
             var allCourse = await _courseRepository.GetCourse((int)courseId);
             if (allCourse != null)
-                return Ok(allCourse);
+                return Ok(allCourse.Data);
             else
                 return BadRequest(new Result<IActionResult>(false, ResultConstant.RecordFound));
         }

@@ -15,5 +15,6 @@ namespace BestCodify.DataAccess.Data
         public DbSet<Course> Courses { get; set; }
         public DbSet<CourseImage> CourseImages { get; set; }
         public DbSet<AppUser> AppUsers { get; set; }
+        public DbSet<CourseOrderInfo> CourseOrderInfo { get; set; }
     }
 }

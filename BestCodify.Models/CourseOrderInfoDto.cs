@@ -6,6 +6,9 @@ namespace BestCodify.Models
     {
         [Key]
         public int Id { get; set; }
+        public string Title { get; set; }
+        public string SubTitle { get; set; }
+        public int TotalCount { get; set; }
         public string UserId { get; set; }
         public string StripeSessionId { get; set; }
         public decimal CoursePrice { get; set; }
