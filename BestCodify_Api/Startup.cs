@@ -1,4 +1,4 @@
-using BestCodify.Business;
+﻿using BestCodify.Business;
 using BestCodify.Business.Repository.IRepository;
 using BestCodify.DataAccess.Data;
 using BestCodify_Api.Helper;
@@ -13,6 +13,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
+using Stripe;
 using System;
 using System.Text;
 
@@ -114,6 +115,10 @@ namespace BestCodify_Api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            //Stiper erısım bılgısını baslangıcta almak ıcın tanımlama yapıyorum
+            StripeConfiguration.ApiKey = Configuration.GetSection("Stripe")["ApiKey"];
+
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

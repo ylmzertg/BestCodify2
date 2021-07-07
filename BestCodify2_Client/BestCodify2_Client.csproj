@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BestCodify.Business\BestCodify.Business.csproj" />
+    <ProjectReference Include="..\BestCodify.Common\BestCodify.Common.csproj" />
   </ItemGroup>
 
 </Project>

@@ -21,6 +21,7 @@ namespace BestCodify2_Client
             builder.Services.AddBlazoredLocalStorage();
             builder.Services.AddScoped<ICourseService, CourseService>();
             builder.Services.AddScoped<ICourseOrderInfoService, CourseOrderInfoService>();
+            builder.Services.AddScoped<IStripePaymentService, StripePaymentService>();
             await builder.Build().RunAsync();
         }
     }

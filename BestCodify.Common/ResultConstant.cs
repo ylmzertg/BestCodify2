@@ -13,6 +13,9 @@
         public const string IdNotNull = "Id value not null";
         public const string InvalidAuthentication = "Invalid Authentication";
         public const string TokenResponseMessage = "Token Create Successfull";
+        public const string PaymentSuccessfull = "Payment Successfull";
+        public const string CourseOrderInfo = "CourseOrderInfo";
+        
 
         //---------------------------------------------------------------------------------------//
         public const string Admin_Role = "Administrator";
@@ -35,5 +38,7 @@
         public const string Status_Pending = "Pending";
         public const string Status_Cancelled = "Cancelled";
         public const string Status_Completed = "Completed";
+
+     
     }
 }

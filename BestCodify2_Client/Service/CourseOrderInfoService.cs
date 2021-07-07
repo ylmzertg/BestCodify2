@@ -1,8 +1,10 @@
 ﻿using BestCodify.Common;
 using BestCodify.Models;
 using BestCodify2_Client.Service.IServices;
+using Newtonsoft.Json;
 using System;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace BestCodify2_Client.Service
@@ -23,9 +25,25 @@ namespace BestCodify2_Client.Service
             throw new NotImplementedException();
         }
 
-        public Task<Result<CourseOrderInfoDto>> SaveCourseOrderInfo()
+        public async Task<Result<CourseOrderInfoDto>> SaveCourseOrderInfo(CourseOrderInfoDto model)
         {
-            throw new NotImplementedException();
+            var content = JsonConvert.SerializeObject(model);
+            var bodyContent = new StringContent(content, Encoding.UTF8, "application/json");
+            var response = await _httpClient.PostAsync("api/courseOrder/create", bodyContent);
+            string res = response.Content.ReadAsStringAsync().Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var contentTemp = await response.Content.ReadAsStringAsync();
+                var a =   response.Content.ReadAsStringAsync().Result;
+                var result = JsonConvert.DeserializeObject<CourseOrderInfoDto>(a);
+                return new Result<CourseOrderInfoDto>(true, ResultConstant.RecordFound, result);
+            }
+            else
+            {
+                var contentTemp = await response.Content.ReadAsStringAsync();
+                var errorModel = JsonConvert.DeserializeObject<CourseOrderInfoDto>(contentTemp);
+                return new Result<CourseOrderInfoDto>(false, ResultConstant.RecordNotFound);
+            }
         }
     }
 }
