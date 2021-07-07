@@ -17,7 +17,7 @@ namespace BestCodify.DataAccess.Data
 
         [Required(ErrorMessage = "Must be selected Is-Active")]
         public bool IsActive { get; set; } = true;
-
+        public string Description { get; set; }
         [Required]
         public string Title { get; set; }
         public string SubTitle { get; set; }

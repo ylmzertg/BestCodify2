@@ -10,30 +10,30 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8">
-            <img src="@CourseOrderInfoVM.CourseInfo?.CourseDto?.CourseImageDto?.CourseImageUrl" alt="project-image"
+            <img src="images/ertugrulYilmaz.jpeg" alt="project-image" style="height: 350px; width: 350px;"/>
             <div class="project-info-box mt-0">
-                <h3>@CourseOrderInfoVM.CourseInfo?.Title</h3>
+                <h3 class="display-3">@CourseOrderInfoVM.CourseInfo?.Title</h3>
                 <br />
-                <h5>@CourseOrderInfoVM.CourseInfo?.SubTitle</h5>
+                <h5 class="display-5">@CourseOrderInfoVM.CourseInfo?.SubTitle</h5>
                 <p class="mb-0">
                     @CourseOrderInfoVM.CourseInfo?.CourseDto?.Description
                 </p>
             </div><!-- / project-info-box -->
             <br />
-            <div class="project-info-box">
-                <p><b>Name:</b> @CourseOrderInfoVM.CourseInfo?.CourseDto?.CreatedBy</p>
+            <div class="project-info-box col-7">
+                <p style="display: inline-block;"><b>Name:</b> @CourseOrderInfoVM.CourseInfo?.CourseDto?.CreatedBy</p>
                 <br />
-                <p><b>Create Date:</b>  @CourseOrderInfoVM.CourseInfo?.CourseDto?.CreatedDate</p>
+                <p style="display: inline-block;"><b>Create Date:</b>  @CourseOrderInfoVM.CourseInfo?.CourseDto?.CreatedDate</p>
                 <br />
-                <p><b>Created BY:</b>  @CourseOrderInfoVM.CourseInfo?.CourseDto?.CreatedBy</p>
+                <p style="display: inline-block;"><b>Created BY:</b>  @CourseOrderInfoVM.CourseInfo?.CourseDto?.CreatedBy</p>
                 <br />
-                <p><b>Record Count : </b> @CourseOrderInfoVM.CourseInfo?.CourseDto?.TotalCount</p>
+                <p style="display: inline-block;"><b>Record Count : </b> @CourseOrderInfoVM.CourseInfo?.CourseDto?.TotalCount</p>
                 <br />
-                <p class="mb-0"><b>Price:</b> $ : @CourseOrderInfoVM.CourseInfo?.CoursePrice</p>
+                <p class="mb-0" style="display: inline-block;"><b>Price:</b> $ : @CourseOrderInfoVM.CourseInfo?.CoursePrice</p>
                 <br />
             </div><!-- / project-info-box -->
             <br />
-            <div class="project-info-box mt-0 mb-0">
+            <div class="project-info-box mt-0 mb-0 col-5" >
                 <p class="mb-0">
                     <span class="fw-bold mr-10 va-middle hide-mobile">Share:</span>
                     <a href="#x" class="btn btn-xs btn-facebook btn-circle btn-icon mr-5 mb-0"><i class="fab fa-facebook-f"></i></a>
@@ -45,7 +45,7 @@
             <br />
         </div><!-- / column -->
 
-        <div class="col-md-4">
+        <div class="col-md-4" style="border-left: 6px solid white;">
             <EditForm Model="CourseOrderInfoVM" class="container" OnValidSubmit="HandleGoCheckout">
 
                 <div class="row px-2 text-success border-bottom"><div class="col-7 py-1"><p style="font-size:x-large;margin:0px;">Enter Details</p></div></div>
